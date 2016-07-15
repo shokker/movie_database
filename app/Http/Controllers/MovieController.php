@@ -23,8 +23,10 @@ class MovieController extends Controller
 
     public function show($id)
     {
+        $categories = Category::all();
     	$movie = Movie::find($id);
-    	return view('movies.show',compact('movie'));
+        $years = DB::table('movies')->select('year')->distinct()->get();
+    	return view('movies.show',compact('movie','years','categories'));
     }
 
     public function by_year($year)

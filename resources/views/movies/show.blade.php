@@ -8,6 +8,8 @@
 
 @section('content')
 
+	@include('partials/left_panel')
+
 	<h2>{{ $movie->title  }}</h2>
 
 	<img src="{{$movie->image }}" alt="">
