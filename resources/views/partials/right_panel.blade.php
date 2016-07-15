@@ -1,4 +1,4 @@
-<div class="col-md-4">
+<div class="col col-md-6">
 				<div class="jumbotron text-center">
 					<h2>{{ $movie->title }}</h2>
 					<a href="{{URL('movies',$movie->id)}}">

@@ -9,7 +9,7 @@ movie databse
 @section('content')
 	@include('partials/left_panel')
 	<div class="col col-md-9">
-		<div class="row row-eq-height">
+		<div class="row">
 			@foreach ($movies as $movie)
 				@include('partials/right_panel')
 			@endforeach
