@@ -13,7 +13,7 @@
     <body>
         <div class="container-fluid">
         <div class="jumbotron text-center">
-        <h1>Movie database</h1>
+        <h1><a href="/">Movie database</a></h1>
         </div>  
             @yield('content')
         </div>

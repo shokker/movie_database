@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+Route::get('/','MovieController@index');
 Route::resource('movies','MovieController');
 Route::resource('categories','CategoryController');
+Route::get('/by_year/{year}','MovieController@by_year');
