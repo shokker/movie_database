@@ -2,19 +2,18 @@
 
 @section('title') 
 
- {{ $category->name }} 
+ {{ $year }} 
 
 @endsection
 
 @section('content')
-
 		@include('partials/left_panel')
-		<div class="col col-md-9">
+		<div class="col col-md-9 ">
 			<div class="jumbotron text-center">
-				<h2>{{ $category->name }}</h2>
+				<h2>{{ $year }}</h2>
 			</div>
-			<div class="row row-eq-height">
-				@foreach ($category->movie as $movie)
+			<div class="row">
+				@foreach ($movies as $movie)
 					@include('partials/right_panel')
 				@endforeach
 			</div>

@@ -34,7 +34,7 @@ class MovieController extends Controller
      $movies = Movie::where('year',$year)->get();
      $categories = Category::all();
      $years = DB::table('movies')->select('year')->distinct()->get();
-     return view('movies.home',compact('movies','categories','years'));   
+     return view('movies.year',compact('movies','categories','years','year'));   
     }
 }
 

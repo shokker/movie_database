@@ -1,4 +1,4 @@
-<div class="col col-sm-3">				
+<div class="col col-md-3">				
 	<div class="list-goup">
 		@foreach($categories as $category_for)
 					
@@ -15,3 +15,11 @@
 			@endforeach 	
 	</select>
 </div>
+
+<script>
+function filter() {
+    var x = document.getElementById("sel1");
+    var i = x.selectedIndex;
+    window.location.replace('/by_year/'+ x.options[i].text);
+}
+</script>
