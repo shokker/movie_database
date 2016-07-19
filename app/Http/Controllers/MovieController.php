@@ -15,7 +15,7 @@ class MovieController extends Controller
     {
 
     	$movies = Movie::all();
-    	$categories = Category::all();
+    	$categories = Category::all()->sortby('name');
         $years = DB::table('movies')->select('year')->distinct()->get();
         
     	return view('movies.home',compact('movies','categories','years'));
@@ -23,7 +23,7 @@ class MovieController extends Controller
 
     public function show($id)
     {
-        $categories = Category::all();
+        $categories = Category::all()->sortby('name');
     	$movie = Movie::find($id);
         $years = DB::table('movies')->select('year')->distinct()->get();
     	return view('movies.show',compact('movie','years','categories'));
@@ -32,7 +32,7 @@ class MovieController extends Controller
     public function by_year($year)
     {
      $movies = Movie::where('year',$year)->get();
-     $categories = Category::all();
+     $categories = Category::all()->sortby('name');
      $years = DB::table('movies')->select('year')->distinct()->get();
      return view('movies.year',compact('movies','categories','years','year'));   
     }

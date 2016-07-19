@@ -13,7 +13,7 @@ class CategoryController extends Controller
    public function show($id)
 
    {
-    $categories = Category::all();
+    $categories = Category::all()->sortby('name');
    	$category = Category::find($id);
    	$years = DB::table('movies')->select('year')->distinct()->get();
    	return view('movies.category',compact('category','categories','years'));
