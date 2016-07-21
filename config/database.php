@@ -52,33 +52,30 @@ return [
             'prefix' => '',
         ],
 
-        'mysql' => [
-            'driver' => 'mysql',
-            'host' => env('DB_HOST', 'localhost'),
-            'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
-            'charset' => 'utf8',
-            'collation' => 'utf8_unicode_ci',
-            'prefix' => '',
-            'strict' => false,
-            'engine' => null,
-        ],
+			 'mysql' => [
+			  'driver'    => 'mysql',
+			  'host'      => (getenv('OPENSHIFT_MYSQL_DB_HOST')) ? getenv('OPENSHIFT_MYSQL_DB_HOST') : 'LOCAL_MYSQL_HOST',
+			  'port'      => (getenv('OPENSHIFT_MYSQL_DB_PORT')) ? getenv('OPENSHIFT_MYSQL_DB_PORT') : LOCAL_MYSQL_PORT,
+			  'database'  => (getenv('OPENSHIFT_APP_NAME')) ? getenv('OPENSHIFT_APP_NAME') : 'LOCAL_MYSQL_DATABASE',
+			  'username'  => (getenv('OPENSHIFT_MYSQL_DB_USERNAME')) ? getenv('OPENSHIFT_MYSQL_DB_USERNAME') : 'LOCAL_MYSQL_USERNAME',
+			  'password'  => (getenv('OPENSHIFT_MYSQL_DB_PASSWORD')) ? getenv('OPENSHIFT_MYSQL_DB_PASSWORD') : 'LOCAL_MYSQL_PASSWORD',
+			  'charset'   => 'utf8',
+			  'collation' => 'utf8_unicode_ci',
+			  'prefix'    => '',
+		],
+		'pgsql' => [
+			'driver'   => 'pgsql',
+			'host'     => env('DB_HOST', getenv('OPENSHIFT_POSTGRESQL_DB_HOST', 'localhost')),
+			'port'     => env('DB_PORT', getenv('OPENSHIFT_POSTGRESQL_DB_PORT', 5432)),
+			'database' => env('DB_DATABASE', getenv('OPENSHIFT_APP_NAME', 'forge')),
+			'username' => env('DB_USERNAME', getenv('OPENSHIFT_POSTGRESQL_DB_USERNAME', 'forge')),
+			'password' => env('DB_PASSWORD', getenv('OPENSHIFT_POSTGRESQL_DB_PASSWORD', '')),
+			'charset'  => 'utf8',
+			'prefix'   => '',
+			'schema'   => 'public',
+		]
 
-        'pgsql' => [
-            'driver' => 'pgsql',
-            'host' => env('DB_HOST', 'localhost'),
-            'port' => env('DB_PORT', '5432'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
-            'charset' => 'utf8',
-            'prefix' => '',
-            'schema' => 'public',
-        ],
-
-    ],
+		],
 
     /*
     |--------------------------------------------------------------------------
