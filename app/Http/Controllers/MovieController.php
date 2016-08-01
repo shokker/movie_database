@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Movie;
 use App\Category;
 
@@ -13,6 +12,8 @@ class MovieController extends Controller
 {
     public function index()
     {
+       // return tmdb()->getMovie(95)->getJSON();
+
 
     	$movies = Movie::all();
     	$categories = Category::all()->sortby('name');

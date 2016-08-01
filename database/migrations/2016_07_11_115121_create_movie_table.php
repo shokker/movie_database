@@ -18,6 +18,7 @@ class CreateMovieTable extends Migration
             $table->text('text');
             $table->string('image');
             $table->integer('year');
+            $table->integer('tmbd_id');
             $table->timestamps();
         });
     }
