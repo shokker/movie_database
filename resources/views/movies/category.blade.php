@@ -9,7 +9,7 @@
 @section('content')
 
 		@include('partials/left_panel')
-		<div class="col col-md-9">
+		<div class="col col-md-10">
 			<div class="jumbotron text-center">
 				<h2>{{ $category->name }}</h2>
 			</div>

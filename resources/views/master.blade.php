@@ -9,6 +9,7 @@
             @yield('title')
         </title>
         <link href="{{ URL::asset('bootstrap/css/bootstrap.css') }}" rel="stylesheet">
+        <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 
     </head>
     <body>

@@ -1,4 +1,4 @@
-<div class="col col-md-3">				
+<div class="col col-md-2 col-xs-12 col-sm-12">				
 	<div class="list-goup">
 		@foreach($categories as $category_for)
 					
