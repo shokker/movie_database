@@ -20,7 +20,12 @@ Route::post('movies/create_tmdb','MovieController@postCreate_tmdb');
 
 
 
-Route::resource('categories','CategoryController@show');
+Route::get('movies/category/create','MovieController@categoryCreate');
+Route::post('movies/category/create','MovieController@categoryPostCreate');
+Route::get('movies/category/{category}','MovieController@categoryShow');
+
+
+
 Route::get('/by_year/{year}','MovieController@by_year');
 
 

@@ -47,8 +47,12 @@ class MovieController extends Controller
     public function postCreate(Request $request)
     {
         $movies = tmdb()->searchMovie($request->title);
+        $counter = count($movies);
+        if($counter>3){
+            $counter = 3;
+        }
         $categories = Category::all();
-        return view('movies.create_tmdb',compact('movies','categories'));
+        return view('movies.create_tmdb',compact('movies','categories','counter'));
     }
 
     public function postCreate_tmdb(Request $request)
@@ -69,8 +73,30 @@ class MovieController extends Controller
     );
 
        $m->category()->sync($request->get('cat') ?: []);
-       return redirect()->action('MovieController@show',$m->id);
+       return redirect('movies/show',$m->id);
 
+    }
+    public function categoryshow($id)
+
+   {
+    $categories = Category::all()->sortby('name');
+    $category = Category::find($id);
+    $years = DB::table('movies')->select('year')->distinct()->get();
+    return view('movies.category',compact('category','categories','years'));
+    
+   }
+
+   public function categoryCreate()
+    {
+        return view('category.create');
+    }
+
+    public function categoryPostCreate(Request $request)
+    {
+        $category = Category::create([
+            'name'=>$request->get('name')
+            ]);
+        return redirect('/');
     }
    
 }

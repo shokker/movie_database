@@ -20,7 +20,7 @@
 								<span><i class="fa fa-calendar fa-1g fa-fw" aria-hidden="true"> </i>{{$movie->year}}</span>
 							</p>
 							@foreach($movie->category as $category)	
-								<a href="{{ URL('categories',$category->id) }}">
+								<a href="{{ URL('movies/category',$category->id) }}">
 									<button type="button" class="btn btn-primary btn-sm">{{ $category->name }}</button>
 								</a>
 							@endforeach

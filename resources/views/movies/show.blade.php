@@ -16,7 +16,7 @@
 						<p><img src='{{ URL::asset('img/' . $movie->image) }}' alt=""  class="img-responsive center-block"></p>	
 						@foreach($movie->category as $category)
 						<p>		
-						<a href="{{ URL('categories',$category->id) }}">
+						<a href="{{ URL('movies/category',$category->id) }}">
 							<button type="button" class="btn btn-primary btn-block">{{ $category->name }}</button>
 						</a>
 						</p>
@@ -24,6 +24,11 @@
 					</div>
 					<div class="col-md-9 col-sm-7" >
 						<h2>{{ $movie->title  }}</h2>
+						@if(Auth::check())
+							<div class="alert alert-danger">
+								<a href="{{ URL('movies/'. $movie->id . '/edit') }}">edit</a>
+							</div>
+						@endif
 						<div class="alert alert-info">
 							&#9733; {{ tmdb()->getMovie($movie->tmdb)->getVoteAverage() }}
 							<i class="fa fa-calendar fa-1g fa-fw" aria-hidden="true"> </i>{{$movie->year}}

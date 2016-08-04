@@ -2,7 +2,7 @@
 	<div class="list-goup">
 		@foreach($categories as $category_for)
 					
-			<a class="list-group-item" href="{{ URL('categories',$category_for->id) }}">{{ $category_for->name }}</a>
+			<a class="list-group-item" href="{{ URL('movies/category',$category_for->id) }}">{{ $category_for->name }}</a>
 
 		@endforeach 
 

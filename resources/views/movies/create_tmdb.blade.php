@@ -7,7 +7,8 @@
 	<form method="POST" action="/movies/create_tmdb" role='form' enctype="multipart/form-data">
 		<div class="row">
 	 		{!! csrf_field() !!}
-    		@for($i=0;$i<3;$i++)
+    		@for($i=0;$i<$counter;$i++)
+    			@if($counter>0)
     			<div class="col-md-4">
     				<div class='panel panel-default'>
     					<div class="panel-heading">
@@ -19,6 +20,9 @@
         				</div>
     				</div>
     			</div>
+    			@else
+    			<div class="alert alert-danger"><h2>Movie not exist in TMDB</h2></div>
+    			@endif
 			@endfor
 		</div>
 		<h3>Categories</h3>
