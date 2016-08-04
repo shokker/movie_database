@@ -7,7 +7,7 @@
 @endsection
 
 @section('content')
-
+		@include('partials/form')
 		@include('partials/left_panel')
 		<div class="col col-md-10">
 			<div class="jumbotron text-center">

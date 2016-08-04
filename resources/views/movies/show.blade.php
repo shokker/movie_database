@@ -7,7 +7,7 @@
 @endsection
 
 @section('content')
-
+	@include('partials/form')
 	@include('partials/left_panel')
 		<div class="col col-md-10">
 			<div class="panel panel-default">
@@ -24,11 +24,13 @@
 					</div>
 					<div class="col-md-9 col-sm-7" >
 						<h2>{{ $movie->title  }}</h2>
-						&#9733; {{ tmdb()->getMovie($movie->tmbd_id)->getVoteAverage() }}
-						<i class="fa fa-calendar fa-1g fa-fw" aria-hidden="true"> </i>{{$movie->year}}
+						<div class="alert alert-info">
+							&#9733; {{ tmdb()->getMovie($movie->tmdb)->getVoteAverage() }}
+							<i class="fa fa-calendar fa-1g fa-fw" aria-hidden="true"> </i>{{$movie->year}}
+						</div>
 						<p> {{ $movie->text }} </p>
 						<p>
-						@foreach(tmdb()->getMovie($movie->tmbd_id)->get('casts') as $key=>$value)
+						@foreach(tmdb()->getMovie($movie->tmdb)->get('casts') as $key=>$value)
 							@if($key=='crew')
 								<div class='panel panel-warning'>
 									<div class="panel-heading">	
@@ -74,7 +76,7 @@
 							</div>
 							<div class='panel-body'>
 								<div class="embed-responsive embed-responsive-16by9">
-									<iframe class="embed-responsive-item" src="{{ URL::asset('https://www.youtube.com/embed/'. tmdb()->getMovie($movie->tmbd_id)->getTrailer()) }}">
+									<iframe class="embed-responsive-item" src="{{ URL::asset('https://www.youtube.com/embed/'. tmdb()->getMovie($movie->tmdb)->getTrailer()) }}">
 									</iframe>
 								</div>
 							</div>

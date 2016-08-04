@@ -12,6 +12,22 @@
 */
 
 Route::get('/','MovieController@index');
-Route::resource('movies','MovieController');
-Route::resource('categories','CategoryController');
+Route::get('movies','MovieController@index');
+Route::get('movies/create','MovieController@create');
+Route::post('movies/create','MovieController@postCreate');
+Route::get('movies/{movie}','MovieController@show');
+Route::post('movies/create_tmdb','MovieController@postCreate_tmdb');
+
+
+
+Route::resource('categories','CategoryController@show');
 Route::get('/by_year/{year}','MovieController@by_year');
+
+
+Route::get('auth/login', 'Auth\AuthController@getLogin');
+Route::post('auth/login', 'Auth\AuthController@postLogin');
+Route::get('auth/logout', 'Auth\AuthController@getLogout');
+
+// Registration routes...
+Route::get('auth/register', 'Auth\AuthController@getRegister');
+Route::post('auth/register', 'Auth\AuthController@postRegister');

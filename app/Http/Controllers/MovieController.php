@@ -12,7 +12,7 @@ class MovieController extends Controller
 {
     public function index()
     {
-       // return tmdb()->getMovie(95)->getJSON();
+        //return tmdb()->getMovie(95)->getJSON();
 
 
     	$movies = Movie::all();
@@ -37,5 +37,41 @@ class MovieController extends Controller
      $years = DB::table('movies')->select('year')->distinct()->get();
      return view('movies.year',compact('movies','categories','years','year'));   
     }
+
+    public function create()
+    {
+        return view('movies.create');
+    }
+    
+
+    public function postCreate(Request $request)
+    {
+        $movies = tmdb()->searchMovie($request->title);
+        $categories = Category::all();
+        return view('movies.create_tmdb',compact('movies','categories'));
+    }
+
+    public function postCreate_tmdb(Request $request)
+    {
+       $movie = tmdb()->getMovie($request->get('movie'));
+       $imageName =$movie->get('title'). '.' . $request->file('image')->getClientOriginalExtension();
+       //return dd( $request->file('image'));
+       $m = Movie::create([
+        'title'=>$movie->get('title'),
+        'text'=>$movie->get('overview'),
+        'tmdb'=>$request->get('movie'),
+        'year'=>date('Y', strtotime($movie->get('release_date'))),
+        'image'=>$imageName,
+
+        ]);
+        $request->file('image')->move(
+        base_path() . '/public/img/', $imageName
+    );
+
+       $m->category()->sync($request->get('cat') ?: []);
+       return redirect()->action('MovieController@show',$m->id);
+
+    }
+   
 }
 

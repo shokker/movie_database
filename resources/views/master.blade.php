@@ -16,7 +16,8 @@
         <div class="container-fluid">
             <div class="jumbotron text-center">
                 <h1><a href="/">Movie database</a></h1>
-            </div>  
+            </div> 
+    
             <div class="row">
                 @yield('content')
             </div>
