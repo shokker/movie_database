@@ -46,6 +46,7 @@ class MovieController extends Controller
 
     public function postCreate(Request $request)
     {
+        
         $movies = tmdb()->searchMovie($request->title);
         $counter = count($movies);
         if($counter>3){
@@ -72,8 +73,9 @@ class MovieController extends Controller
         base_path() . '/public/img/', $imageName
     );
 
-       $m->category()->sync($request->get('cat') ?: []);
-       return redirect('movies/show',$m->id);
+       $m->category()->sync($request->get('category') ?: []);
+       $url = url('movies',$id);
+       return redirect($url);
 
     }
     public function categoryshow($id)
@@ -98,6 +100,65 @@ class MovieController extends Controller
             ]);
         return redirect('/');
     }
-   
+    public function edit($id)
+    {
+        $movie = Movie::find($id);
+        $categories = Category::all();
+        $movie->category;
+        return view('movies.edit',compact('movie','categories','counter'));
+
+    }
+    public function update(Request $request, $id)
+
+    {
+        //return dd($request->all());
+        $movies = tmdb()->searchMovie($request->title);
+        $counter = count($movies);
+        if($counter>3){
+            $counter = 3;
+        }
+        $categories = Category::all();
+        $movie = Movie::find($id);
+        $imageName =$movie->id. '.' . $request->file('image')->getClientOriginalExtension();
+       //return dd( $request->file('image'));
+       $movie->update([
+        'image'=>$imageName,
+
+        ]);
+        $request->file('image')->move(
+        base_path() . '/public/img/', $imageName
+        );
+
+        $movie->category()->sync($request->get('category') ?: []);
+        return view('movies.update_tmdb',compact('movies','categories','counter','movie'));
+
+
+    }
+    public function putUpdate_tmdb(Request $request, $id)
+
+    {
+        $m = Movie::find($id);
+        $movie = tmdb()->getMovie($request->get('movie'));
+        $m->update([
+        'title'=>$movie->get('title'),
+        'text'=>$movie->get('overview'),
+        'tmdb'=>$request->get('movie'),
+        'year'=>date('Y', strtotime($movie->get('release_date'))),
+
+        ]);
+        $url = url('movies',$id);
+        return redirect($url);
+
+
+    }
+    public function delete($id)
+    {
+
+       $movie = Movie::find($id);
+       $movie->delete();
+
+        $url = url('/');
+        return redirect($url);  
+   }
 }
 

@@ -10,6 +10,8 @@
         </title>
         <link href="{{ URL::asset('bootstrap/css/bootstrap.css') }}" rel="stylesheet">
         <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="bootstrap/js/bootstrap.min.js"></script>
 
     </head>
     <body>
@@ -22,7 +24,9 @@
                 @yield('content')
             </div>
         </div>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <script src="bootstrap/js/bootstrap.min.js"></script>
+       
     </body>
 </html>
+
+
+

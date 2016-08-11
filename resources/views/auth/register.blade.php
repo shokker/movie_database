@@ -2,8 +2,69 @@
 @extends('master')
 
 @section('content')
-
 <div class="col-md-4">
+
+@if(count($errors)>0)
+  @foreach($errors->all() as $error)
+    <ul class='alert alert-danger'>
+      <li>{{ $error }}</li>
+      
+    </ul>
+  @endforeach
+@endif
+
+
+{!! Form::open(['url'=>'auth/register', 'method'=>'post' ]) !!}
+
+<h2>Register</h2>
+
+
+<div class="form-group">
+{!! Form::label('name', 'Name') !!}
+{!! Form::text('name', null, [
+    'class'=>'form-control',
+    'reqiured'=>true,
+    'autofocus'=>true,
+
+]) !!}    
+</div>
+<div class="form-group">
+  
+  {!! Form::label('email', 'Email') !!}
+  {!! Form::email('email',null, [
+    'class'=>'form-control',
+    'required' => true,
+    'placeholder'=>'email@example',
+    
+  ]) !!}
+</div>
+<div class="form-group">
+{!! Form::label('password','Password') !!}
+  {!! Form::password('password', [
+    'class'=>'form-control',
+    'reqiured'=>true,
+
+  ]) !!}
+
+  <div class="form-group">
+{!! Form::label('password_confirmation','Password again') !!}
+  {!! Form::password('password_confirmation', [
+    'class'=>'form-control',
+    'reqiured'=>true,
+
+  ]) !!}
+
+  <div class="form-group">  
+    {!! Form::submit('Submit', [
+        'class'=>'btn btn-default',
+    ]) !!}
+  </div>
+
+  {!! Form::close() !!}
+</div>
+
+
+{{--<div class="col-md-4">
 
 <form method="POST" action="/auth/register" role='form'>
     {!! csrf_field() !!}
@@ -29,6 +90,6 @@
 
   <button type="submit" class="btn btn-default">Submit</button>
 </form>
-</div>
+</div> --}}
 
 @endsection

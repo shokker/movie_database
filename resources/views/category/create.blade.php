@@ -5,14 +5,24 @@
 
 <div class="col-md-12">
 
-<form method="POST" action="/movies/category/create" role='form'>
-    {!! csrf_field() !!}
+{!! Form::open(['url'=>'movies/category/create','method'=>'POST']) !!}
 
-    <div class='form-group'>
-        <label for="title">Name:</label>
-        <input type="text" class="form-control" id="name" name="name" value="">
-    </div>
-  <button type="submit" class="btn btn-default">Submit</button>
-</form>
+<h2>Create Category</h2>
+
+<div class="form-group">
+	{!! Form::label('name', 'Name') !!}
+	{!! Form::text('name',null, [
+		'class'=>'form-control',
+		'required'=>true,
+		'autofocus'=>true,
+	]) !!}
 </div>
+
+<div class="form-group">
+	{!! Form::submit('Create Category',[
+		'class'=>'btn btn-default',
+	]) !!}
+
+</div>
+{!! Form::close() !!}
 @endsection

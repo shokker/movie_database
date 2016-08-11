@@ -17,6 +17,13 @@ Route::get('movies/create','MovieController@create');
 Route::post('movies/create','MovieController@postCreate');
 Route::get('movies/{movie}','MovieController@show');
 Route::post('movies/create_tmdb','MovieController@postCreate_tmdb');
+Route::get('movies/{movie}/edit','MovieController@edit');
+Route::put('movies/{movie}','MovieController@update');
+Route::put('movies/update_tmdb/{movie}','MovieController@putUpdate_tmdb');
+Route::get('movies/{movie}/delete','MovieController@delete');
+
+
+
 
 
 

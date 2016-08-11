@@ -5,14 +5,35 @@
 
 <div class="col-md-12">
 
-<form method="POST" action="/movies/create" role='form'>
-    {!! csrf_field() !!}
+	{!! Form::open(['url'=>'movies/create','method'=>'post']) !!}
 
-    <div class='form-group'>
-        <label for="title">Title:</label>
-        <input type="text" class="form-control" id="title" name="title" value="">
-    </div>
-  <button type="submit" class="btn btn-default">Submit</button>
-</form>
+	<h2>Add Movie 1/2: Basic</h2>
+
+
+	<div class="form-group">
+		{!! Form::label('title', 'Title') !!}
+		{!! Form::text('title', null, [
+			'class'=>'form-control',
+			'autofocus'=>true,
+			'reqiured'=>true,
+		]) !!}
+	</div>
+
+	
+	<div class="form-group">
+		
+		{!! Form::submit('Next', [
+			'class'=>'btn btn-default',
+		]) !!}
+	</div>
+	{!! Form::close() !!}
+
+
+
+
+
+
 </div>
+
+
 @endsection

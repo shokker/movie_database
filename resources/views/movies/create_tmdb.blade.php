@@ -4,9 +4,9 @@
 @section('content')
 
 <div class="col-md-12">
-	<form method="POST" action="/movies/create_tmdb" role='form' enctype="multipart/form-data">
+    {!! Form::open(['url'=>'movies/create_tmdb','method'=>'POST','files'=>true]) !!}
+    <h2>Add Movie 2/2: Choose film from TMDB</h2>
 		<div class="row">
-	 		{!! csrf_field() !!}
     		@for($i=0;$i<$counter;$i++)
     			@if($counter>0)
     			<div class="col-md-4">
@@ -16,7 +16,9 @@
         				</div>
         				<div class="panel-body">
         					<section> {{$movies[$i]->get('overview')}}</section>
-        					<input type="radio" name="movie" value="{{$movies[$i]->get('id')}}" checked> Select
+                            {!! Form::radio('movie',$movies[$i]->get('id')) !!}
+                                
+        					 Select
         				</div>
     				</div>
     			</div>
@@ -25,15 +27,25 @@
     			@endif
 			@endfor
 		</div>
-		<h3>Categories</h3>
-		@foreach($categories as $category)
-		<span class='form-group'>
-			<input type="checkbox" name="cat[]" value="{{ $category->id }}"> {{$category->name}}
-		</span>
-		@endforeach
-	<h3>Choose image</h3>
-	<input type="file" name="image" accept="image/*">
-	<button type="submit" class="btn btn-default">Submit</button>
-	</form>
+        <div class="form-group">
+        <h3>Categories</h3>
+        @foreach($categories as $category)
+            <label>
+                {!! Form::checkbox('category[]', $category->id) !!}
+                {{ $category->name }}
+            </label>
+        @endforeach
+    </div>
+    <div class="form-group">
+        <h3>Choose Poster</h3>
+        {!! Form::file('image', [
+            'class'=>'form-control',
+            'accept'=>'image/*',
+        ]) !!}
+    </div>
+		{!! Form::submit('Submit', [
+            'class'=>'btn btn-default',
+        ]) !!}
+	{!! Form::close() !!}
 </div>
 @endsection

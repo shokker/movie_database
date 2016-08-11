@@ -25,9 +25,15 @@
 					<div class="col-md-9 col-sm-7" >
 						<h2>{{ $movie->title  }}</h2>
 						@if(Auth::check())
-							<div class="alert alert-danger">
-								<a href="{{ URL('movies/'. $movie->id . '/edit') }}">edit</a>
-							</div>
+							<p>
+							<span>
+								<a href="{{ URL('movies/'. $movie->id . '/edit') }}" class="btn btn-info" role="button"><i class="fa fa-pencil" aria-hidden="true"></i> edit</a>
+							</span>
+							<span>
+								<a href="{{ URL('movies/'. $movie->id . '/delete') }}" class="btn btn-danger" role="button"><i class="fa fa-times" aria-hidden="true"></i> delete</a>
+							</span>
+							</p>
+							
 						@endif
 						<div class="alert alert-info">
 							&#9733; {{ tmdb()->getMovie($movie->tmdb)->getVoteAverage() }}

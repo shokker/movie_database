@@ -8,6 +8,7 @@
         "php": ">=5.5.9",
         "laravel/framework": "5.2.*",
         "kryptonit3/tmdb-laravel": "0.3",
+        "laravelcollective/html": "~5.0"
         
     },
     "require-dev": {
