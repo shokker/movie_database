@@ -4,8 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-
-class movieRequest extends Request
+class categoryRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,8 +25,7 @@ class movieRequest extends Request
     {
         return [
 
-            'title'=>'required|max:250|min:3',
-            
+            'name'=>'required|unique:categories|min:3',
             //
         ];
     }

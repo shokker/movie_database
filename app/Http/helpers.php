@@ -8,3 +8,22 @@ function limit_text($text, $limit) {
       }
       return $text;
     }
+
+
+ function createSlug($text , $id){
+ 	// replace 
+ 	$text = preg_replace('~[^\pL\d]+~u', '-', $text);
+ 	// remove
+ 	$text = preg_replace('~[^-\w]+~', '', $text);
+
+ 	// remove duplicate -
+  	$text = preg_replace('~-+~', '-', $text);
+
+  	// lowercase
+  	$text = strtolower($text);
+
+    
+
+ 	return $text . '-' . $id; 
+
+ }

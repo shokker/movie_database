@@ -36,7 +36,7 @@
 							
 						@endif
 						<div class="alert alert-info">
-							&#9733; {{ tmdb()->getMovie($movie->tmdb)->getVoteAverage() }}
+							&#9733; {{ tmdb()->getMovie($movie->tmdb)->getVoteAverage() }} 
 							<i class="fa fa-calendar fa-1g fa-fw" aria-hidden="true"> </i>{{$movie->year}}
 						</div>
 						<p> {{ $movie->text }} </p>
@@ -79,7 +79,7 @@
 									</div>
 								</div>
 							@endif
-						@endforeach
+						@endforeach 
 						</p>
 						<div class='panel panel-danger'>
 							<div class="panel-heading">
@@ -87,8 +87,8 @@
 							</div>
 							<div class='panel-body'>
 								<div class="embed-responsive embed-responsive-16by9">
-									<iframe class="embed-responsive-item" src="{{ URL::asset('https://www.youtube.com/embed/'. tmdb()->getMovie($movie->tmdb)->getTrailer()) }}">
-									</iframe>
+									<iframe class="embed-responsive-item" src="{{ URL::asset('https://www.youtube.com/embed/'. tmdb()->getMovie($movie->tmdb)->getTrailer()) }}" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen">
+									</iframe> 
 								</div>
 							</div>
 						</div>

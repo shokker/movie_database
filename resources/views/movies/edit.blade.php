@@ -30,6 +30,13 @@
             'accept'=>'image/*',
         ]) !!}
     </div>
+     <div class="form-group">
+                     <h3>Choose Cover</h3>
+                    {!! Form::file('cover-img', [
+                    'class'=>'form-control',
+                    'accept'=>'image/*',
+                    ]) !!}
+                 </div>
 	
 	<div class="form-group">
 		

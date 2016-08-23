@@ -4,8 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-
-class movieRequest extends Request
+class tmdbRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -15,7 +14,7 @@ class movieRequest extends Request
     public function authorize()
     {
         return \Auth::check();
-    }
+          }
 
     /**
      * Get the validation rules that apply to the request.
@@ -25,9 +24,8 @@ class movieRequest extends Request
     public function rules()
     {
         return [
-
-            'title'=>'required|max:250|min:3',
-            
+            'image'=>'mimes:jpeg,jpg,png,gif|required|max:10000',
+            'cover-img'=>'mimes:jpeg,jpg,png,gif|required|max:10000',
             //
         ];
     }
