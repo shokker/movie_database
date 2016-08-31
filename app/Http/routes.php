@@ -29,11 +29,10 @@ Route::get('movies/{movie}/delete','MovieController@delete');
 
 Route::get('movies/category/create','MovieController@categoryCreate');
 Route::post('movies/category/create','MovieController@categoryPostCreate');
-Route::get('movies/category/{category}','MovieController@categoryShow');
+Route::post('movies/filter/{category}','MovieController@categoryShow');
 
 
 
-Route::get('/by_year/{year}','MovieController@by_year');
 
 
 Route::get('auth/login', 'Auth\AuthController@getLogin');

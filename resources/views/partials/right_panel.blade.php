@@ -1,18 +1,17 @@
 
 
 <div class="col col-md-6 col-sm-12 col-xs-12">
-				<div class="panel panel-default" style="min-height:240px;">
+			<a href="{{URL('movies',$movie->slug)}}" >
+				<div class="panel panel-default movie_block" style="min-height:240px;">
 				<div class="row">
 				
 					<div class="col col-md-5 hidden-xs  col-lg-4 col-sm-4">
-						<a href="{{URL('movies',$movie->slug)}}">
-						<img  src='{{ URL::asset('img/' . $movie->image) }}' alt="" class="center-block" style="height:240px;width:185px;">
-						</a>
+						
+						<img  src='{{ URL::asset('img/' . $movie->image) }}' alt="" class="center-block img-responsive" style="max-height:240px;max-width:185px;">
+			
 					</div>
 					<div class="col hidden-md col-xs-12 hidden-lg hidden-sm">
-						<a href="{{URL('movies',$movie->slug)}}">
 						<img  src='{{ URL::asset('img/' . $movie->coverImg) }}' alt="" class="center-block img-responsive">
-						</a>
 					</div>
 					<div class="col col-md-7 hidden-xs col-lg-8 col-sm-8">
 						<div class="panel-body">
@@ -41,5 +40,6 @@
 						</div>
 					</div>
 				</div>
+				</a>
 				</div>
-			</div>
+			

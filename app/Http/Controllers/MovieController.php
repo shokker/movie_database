@@ -19,7 +19,9 @@ class MovieController extends Controller
 
     	$movies = Movie::all();
     	$categories = Category::all()->sortby('name');
-        $years = DB::table('movies')->select('year')->distinct()->get();
+        $years = DB::table('movies')->select('year')->distinct()->pluck('year');
+        sort($years);
+      //  return $years;
         
     	return view('movies.home',compact('movies','categories','years'));
     }
@@ -29,17 +31,12 @@ class MovieController extends Controller
         $categories = Category::all()->sortby('name');
     	$movie = Movie::whereSlug($slug)->first();
        
-        $years = DB::table('movies')->select('year')->distinct()->get();
+        $years = DB::table('movies')->select('year')->distinct()->pluck('year');
+        sort($years);
+        //return $years;
     	return view('movies.show',compact('movie','years','categories'));
     }
 
-    public function by_year($year)
-    {
-     $movies = Movie::where('year',$year)->get();
-     $categories = Category::all()->sortby('name');
-     $years = DB::table('movies')->select('year')->distinct()->get();
-     return view('movies.year',compact('movies','categories','years','year'));   
-    }
 
     public function create()
     {
@@ -96,15 +93,6 @@ class MovieController extends Controller
        return redirect($url);
 
     }
-    public function categoryshow($id)
-
-   {
-    $categories = Category::all()->sortby('name');
-    $category = Category::find($id);
-    $years = DB::table('movies')->select('year')->distinct()->get();
-    return view('movies.category',compact('category','categories','years'));
-    
-   }
 
    public function categoryCreate()
     {
@@ -157,9 +145,10 @@ class MovieController extends Controller
 
 
     }
-    public function putUpdate_tmdb(movieRequest $request, $id)
+    public function putUpdate_tmdb(Request $request, $id)
 
     {
+        
         $m = Movie::find($id);
         $movie = tmdb()->getMovie($request->get('movie'));
         $m->update([
@@ -171,7 +160,9 @@ class MovieController extends Controller
 
         ]);
         $url = url('movies',$m->slug);
+        
         return redirect($url);
+
 
 
     }
@@ -183,6 +174,34 @@ class MovieController extends Controller
 
         $url = url('/');
         return redirect($url);  
+   }
+
+   public function categoryShow(Request $request)
+
+
+   {
+    //return $request->all();
+       if (is_string($request->category)){
+
+        $array = Category::all()->pluck('name');
+       }
+       else{
+        $array=$request->category;
+        }
+       
+       $categories = Category::all();
+       $movies = Movie::with('category')->whereBetween('year',array($request->from,$request->to))->whereHas('category',function($q) use($array){
+
+
+        $q->whereIn('name',$array);
+
+       })->get();
+
+       $years = DB::table('movies')->select('year')->distinct()->pluck('year');
+       sort($years);
+       return view('movies.home',compact('categories','movies','years'));
+
+       return $selected;
    }
 }
 

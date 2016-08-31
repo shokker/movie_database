@@ -9,18 +9,12 @@
 @section('content')
 	@include('partials/form')
 	@include('partials/left_panel')
-		<div class="col col-md-10">
+		<div class="col col-md-10 col-sm-12 col-xs-12" >
 			<div class="panel panel-default">
 				<div class="row">
 					<div class="col-md-3 col-sm-5">
 						<p><img src='{{ URL::asset('img/' . $movie->image) }}' alt=""  class="img-responsive center-block"></p>	
-						@foreach($movie->category as $category)
-						<p>		
-						<a href="{{ URL('movies/category',$category->id) }}">
-							<button type="button" class="btn btn-primary btn-block">{{ $category->name }}</button>
-						</a>
-						</p>
-					@endforeach
+						
 					</div>
 					<div class="col-md-9 col-sm-7" >
 						<h2>{{ $movie->title  }}</h2>
@@ -39,6 +33,12 @@
 							&#9733; {{ tmdb()->getMovie($movie->tmdb)->getVoteAverage() }} 
 							<i class="fa fa-calendar fa-1g fa-fw" aria-hidden="true"> </i>{{$movie->year}}
 						</div>
+						<div class="alert alert-success">
+						@foreach($movie->category as $category)	
+								<span>{{ $category->name }}</span>	
+						@endforeach
+						</div>
+						<h4>Overview</h4>
 						<p> {{ $movie->text }} </p>
 						<p>
 						@foreach(tmdb()->getMovie($movie->tmdb)->get('casts') as $key=>$value)

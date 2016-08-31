@@ -38,5 +38,56 @@ $(function(){
 			});
 			return valid;
 		});
+	$('#select_from').change(function(){
+		var from = $('#select_from option:selected' ).text();
+		$('#select_to option').each(function(){
+
+		if($(this).text()<from){
+			$(this).hide();
+		}
+		else{
+			$(this).show();
+
+
+
+		}
+	});
+
+	});
+
+
+	
+
+	
+
+	$('#categorySearch').submit(function(){
+
+		
+		var from = $('#select_from option:selected').text();
+		var to = $('#select_to option:selected').text();
+		var inputs = $(this).find(':checkbox');
+		var array = [];
+
+		$('#select_from option:selected').val(from);
+		$('#select_to option:selected').val(to);
+
+		inputs.each(function(){
+		if($(this).is(':checked')){
+				array[array.length]=$(this).val(); 
+			}
+		});
+		var url = array.join('-') +'-' + from +'-'+ to;
+		$(this).attr('action','/movies/filter/' + url);
+		return true;
+	});
+
+
+	$('.movie_block').hover(function(){
+
+		$(this).css('box-shadow','0px 0px 7px #BABABA');
+	},function(){
+		$(this).css('box-shadow','0px 0px 0px #BABABA');
+
+	});
 })
 </script>
