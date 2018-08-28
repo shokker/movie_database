@@ -30,7 +30,7 @@
                         Created by Lukáš Danko @ 2016
                       </div>
                       <div class="col col-xs-12 text-center">
-                        <a href="https://github.com/shokker/movie_database"><i class="fa fa-github"> </i> project repozitory</a>
+                        <a href="https://github.com/shokker/movie_database"><i class="fa fa-github"> </i> project repository</a>
                       </div>
 
                     </div>
