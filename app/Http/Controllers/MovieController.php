@@ -22,7 +22,7 @@ class MovieController extends Controller
         $years = DB::table('movies')->select('year')->distinct()->pluck('year');
         sort($years);
       //  return $years;
-        
+
     	return view('movies.home',compact('movies','categories','years'));
     }
 
@@ -30,7 +30,7 @@ class MovieController extends Controller
     {
         $categories = Category::all()->sortby('name');
     	$movie = Movie::whereSlug($slug)->first();
-       
+
         $years = DB::table('movies')->select('year')->distinct()->pluck('year');
         sort($years);
         //return $years;
@@ -42,11 +42,11 @@ class MovieController extends Controller
     {
         return view('movies.create');
     }
-    
+
 
     public function postCreate(movieRequest $request)
     {
-        
+
         $movies = tmdb()->searchMovie($request->title);
         $counter = count($movies);
         if($counter>3){
@@ -64,7 +64,7 @@ class MovieController extends Controller
        //return dd( $request->file('image'));
        //
        $m = Movie::create([
-        
+
         'title'=>$movie->get('title'),
         'text'=>$movie->get('overview'),
         'tmdb'=>$request->get('movie'),
@@ -78,8 +78,8 @@ class MovieController extends Controller
 
             'slug'=>createSlug($m->title,$m->id),
         ]);
-        
-       
+
+
 
         $request->file('image')->move(
         base_path() . '/public/img/', $imageName
@@ -126,7 +126,7 @@ class MovieController extends Controller
         $categories = Category::all();
         $movie = Movie::find($id);
         $imageName =$movie->tmdb. '.' . $request->file('image')->getClientOriginalExtension();
-        $imageNameCover =$request->get('movie') . '-cover' . '.' . $request->file('cover-img')->getClientOriginalExtension();
+        $imageNameCover =$movie->tmdb . '-cover' . '.' . $request->file('cover-img')->getClientOriginalExtension();
        //return dd( $request->file('image'));
        $movie->update([
         'image'=>$imageName,
@@ -148,7 +148,7 @@ class MovieController extends Controller
     public function putUpdate_tmdb(Request $request, $id)
 
     {
-        
+
         $m = Movie::find($id);
         $movie = tmdb()->getMovie($request->get('movie'));
         $m->update([
@@ -160,7 +160,7 @@ class MovieController extends Controller
 
         ]);
         $url = url('movies',$m->slug);
-        
+
         return redirect($url);
 
 
@@ -173,7 +173,7 @@ class MovieController extends Controller
        $movie->delete();
 
         $url = url('/');
-        return redirect($url);  
+        return redirect($url);
    }
 
    public function categoryShow(Request $request)
@@ -188,7 +188,7 @@ class MovieController extends Controller
        else{
         $array=$request->category;
         }
-       
+
        $categories = Category::all();
        $movies = Movie::with('category')->whereBetween('year',array($request->from,$request->to))->whereHas('category',function($q) use($array){
 
@@ -204,4 +204,3 @@ class MovieController extends Controller
        return $selected;
    }
 }
-
